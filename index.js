@@ -10,9 +10,11 @@ async function getContent(url) {
       uri: url,
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16"
+          "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16",
+        "Cookie": cookie          
       }
     };
+    
     // console.log(option);
     var dom = await rp(option).catch(() => {
       console.log("error");
@@ -40,6 +42,7 @@ async function getContent(url) {
     */
 
 var json = [];
+var cookie = "";
 var actions = {
   getData: function() {
     return json;
@@ -57,6 +60,10 @@ function extend(arr, arr1) {
   return arr.map((data, index) => {
     return _.extend(data, arr1[index]);
   });
+}
+
+function setCookie(customCookie){
+  cookie = customCookie;
 }
 
 async function webToJson(urls, config, total, step) {
@@ -129,6 +136,7 @@ function getAbsolutePath(baseUrl, path) {
 
 
 module.exports = {
-    webToJson,
-    extend
-}    
+  webToJson,
+  extend,
+  setCookie
+};    

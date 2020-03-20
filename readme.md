@@ -25,7 +25,7 @@ var {webToJson} = require("webtojson");
 
 
 2. 执行方法
-```
+```js
 (async()=>{    
     var data = await webToJson("http://sports.sina.com.cn/", {
         id: "h3",
@@ -33,6 +33,28 @@ var {webToJson} = require("webtojson");
     });
 })();
 ```
+
+
+有些网站的抓取内容需要提供cookie信息，需要先在浏览器获取cookie, 在通过setCookie保存;
+
+```js
+(async()=>{    
+    var {webToJson, setCookie} = require("webtojson");
+    
+    setCookie("******")    
+    var data = await webToJson("http://sports.sina.com.cn/", {
+        id: "h3",
+        title: "h3"
+    });
+})();
+
+```
+
+
+
+
+
+
 
 
 
