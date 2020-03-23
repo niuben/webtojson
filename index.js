@@ -2,6 +2,7 @@ var cheerio = require("cheerio");
 var _ = require("underscore");
 var rp = require("request-promise");
 var url = require("url");
+var file = require("./lib/file");
 
 var baseUrl = "";
 // 基础方法
@@ -10,17 +11,20 @@ async function getContent(url) {
       uri: url,
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16",
+          // "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16",
+          "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149",
         "Cookie": cookie          
       }
     };
     
-    // console.log(option);
+    
+
     var dom = await rp(option).catch(() => {
       console.log("error");
       return false;
     });
-    // console.log(dom);
+    
+    console.log(dom);  
     return dom;
 }
 
@@ -66,12 +70,21 @@ function setCookie(customCookie){
   cookie = customCookie;
 }
 
+function saveFile(filename){
+  file.create(dom);
+}
+
 async function webToJson(urls, config, total, step) {
   return await loop(urls, config, total, step);
   // return actions;
 }
 
+
+/*
+* 对url页面进行重复we
+*/ 
 async function loop(urls, config, total, step) {
+  
   //处理参数
   var urls = _.isString(urls) ? [urls] : urls;
 
