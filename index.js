@@ -6,6 +6,11 @@ var file = require("./lib/file");
 
 var baseUrl = "";
 // 基础方法
+
+
+
+
+
 async function getContent(url) {
     var option = {
       uri: url,
@@ -16,8 +21,6 @@ async function getContent(url) {
         "Cookie": cookie          
       }
     };
-    
-    
 
     var dom = await rp(option).catch(() => {
       console.log("error");
