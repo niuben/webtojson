@@ -1,6 +1,6 @@
 {
   "name": "webtojson",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "抓取页面信息变成JSON",
   "main": "index.js",
   "scripts": {
