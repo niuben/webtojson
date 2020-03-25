@@ -2,7 +2,6 @@ var _ = require("underscore");
 var { loop, extendCollect } = require("./lib/common");
 
 // 代理层将用户的API翻译await/async形式
-var cookie = "";
 
 var chainArr = [];
 var actions = {};
@@ -64,16 +63,11 @@ function webToJsonChain(urls, config, option) {
     * 初始化参数
     * 1. urls: ""或者[]
     * 2. config: 对象配置
-    * 3. total: 总数
-    * 4. step: 步长
+    * 3. option
     var config = {
         "id": ".typecont>span",
         "title": ".typecont>span a",
-        ”&": {
-            "_url": "selector|url",        
-            "author": ".typecont>span"
-            "content": ".typecont>span .content"
-        }
+        "_url": ".typecont>span a",                          
     }
     */
 async function webToJson(urls, config, option) {

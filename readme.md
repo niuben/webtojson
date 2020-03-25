@@ -1,4 +1,4 @@
-将网页上信息转化成json数据.
+通过jquery selector将网页内容转化成json数据.
 
 ## 快速开始
 1. 安装模块
@@ -96,6 +96,8 @@ webToJsonChain(urls, selector, option).extend(selector).getData()
 extend方法会根据之前数据`_url`字段来打开新地址,
 
 getData可以得到整个链的数据
+
+
 
 
 
