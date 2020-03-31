@@ -1,6 +1,6 @@
 {
   "name": "webtojson",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Use jquery selector to convert web content into json data",
   "main": "index.js",
   "scripts": {

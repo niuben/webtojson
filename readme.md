@@ -1,5 +1,7 @@
 Use jquery selector to convert web content into json data.
 
+![Node.js CI](https://github.com/niuben/webtojson/workflows/Node.js%20CI/badge.svg)
+
 [中文文档](https://github.com/niuben/webtojson/blob/master/readmecn.md)
 
 ## Quick start
