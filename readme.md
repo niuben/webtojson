@@ -24,16 +24,16 @@ Introduce module
 
 ```js
 var webtojson = require("webtojson");
-```
+```  
 
-2. Implementation method
+
+2. Implementation method  
 Execute the `webtojson` method
 
 For example, the following code is the result of crawling the google search keyword `node`;
 ```js
 (async() => {
-    var googleData = await webtojson(
-"Https://www.google.com/search?q=node",
+    var googleData = await webtojson("Https://www.google.com/search?q=node",
       {
         id: ".g",
         title: ".g .r h3"
@@ -44,7 +44,7 @@ For example, the following code is the result of crawling the google search keyw
           "Cookie": "***"
         }
       }
-    ).
+    ).getData();
     console.log(googleData);
 })();
 ```
@@ -64,29 +64,30 @@ result
 ```
 
 ## API
-The module provides the following methods:
+The module provides the following methods:  
+
 * `webtojson`(required)
 * `extend`(optional)
 * `add`(optional)
 * `getData` or` saveFile`(required)
 
-##### webtojson
+### webtojson
 webtojson(urls, selector, option);
 `webtojson` method can grab single page data;
 
 * urls: string | array The url address of the content to be crawled. It can be a single url or multiple;(required)
 * selector: object specifies the content to be crawled;(required)
-* option: object configuration item(optional)
-    * paging: paging configuration(optional)
-        * pageNum: total pages
-        * offset: number offset of each page
-        * keyword: keyword corresponding to string url
-    * headers: request header settings(optional)
-        * User-Agent: Specify useragent(optional)
-        * Cookie: Make a cookie(optional). For example, some search engines need to provide cookies to have results;
+* option: object configuration item(optional)  
+    * paging: paging configuration(optional)  
+        * pageNum: total pages
+        * offset: number offset of each page
+        * keyword: keyword corresponding to string url
+    * headers: request header settings(optional)
+        * User-Agent: Specify useragent(optional)
+        * Cookie: Make a cookie. For example, some search engines need to provide cookies to have results (optional)
 
 
-The following is a form of selector:
+The following is a form of selector:  
 ```
 {
     id: ".typecont span a",
@@ -94,9 +95,12 @@ The following is a form of selector:
     url: ".typecont span a"
 }
 ```
-selector is of the form `key / value`,` key` is the attribute name of the final `json`, and` value` is the attribute value of `json`;
-`value` has two types: String and Function;
-When `value` is` String`, it is a selector similar to jquery, and the content of the selector corresponding to the dom node is used as the json attribute value.
+selector is of the form `key / value`,` key` is the attribute name of the final `json`, and` value` is the attribute value of `json`;  
+
+`value` has two types: String and Function;  
+
+When `value` is` String`, it is a selector similar to jquery, and the content of the selector corresponding to the dom node is used as the json attribute value.  
+
 When `value` is` Function`, the value that the function runs as the json attribute value; something like this:
 
 ```js
@@ -108,15 +112,20 @@ When `value` is` Function`, the value that the function runs as the json attribu
     }
 }
 ```
-The function has two parameters:
+The function has two parameters:  
+
 * $: jquery $
 * parentEle: parent element node, select child nodes based on parent element;
 
-#### extend(selector) or extend(url, selector)
-Data from other pages will be captured and merged with previous data;
-There are two different parameters for extend:
-extend(selector): if there is only a selector parameter, the value of the previous data `url` field will be used to ;
-extend(url, selector): same as webtojson function parameters;
+### extend(selector) or extend(url, selector)
+Data from other pages will be captured and merged with previous data;  
+
+There are two different parameters for extend:  
+
+extend(selector): if there is only a selector parameter, the value of the previous data `url` field will be used to ;  
+
+extend(url, selector): same as webtojson function parameters;  
+
 
 ```js
 var googleData = await webtojson(
@@ -130,10 +139,12 @@ var googleData = await webtojson(
       }).getData();
 
 ```
-extend merges the search list name with the contents of each name;
+extend merges the search list name with the contents of each name;  
 
-#### add(selector) or add(url, selector)
-Add information on the basis of previous data, parameters are consistent with extend method;
+
+### add(selector) or add(url, selector)
+Add information on the basis of previous data, parameters are consistent with extend method;  
+
 
 ```js
 var googleData = await webtojson(
@@ -148,11 +159,11 @@ var googleData = await webtojson(
 
 ```
 
-#### getData()
+### getData()
 Get data for the entire chain;
 
 
-#### saveFile(filePath)
+### saveFile(filePath)
 Save the data as a file
 
 ```js
