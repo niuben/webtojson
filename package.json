@@ -4,7 +4,7 @@
   "description": "Use jquery selector to convert web content into json data",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage && coveralls < ./coverage/lcov.info"
+    "test": "node ./examples/test.chain.js"
   },
   "keywords": ["tojson", "jquery selector", "chain", "convert"],
   "author": "",
