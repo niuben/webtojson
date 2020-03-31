@@ -1,110 +1,105 @@
-通过jquery selector将网页内容转化成json数据.
+Use jquery selector to convert web content into json data.
 
-## 快速开始
-1. 安装模块
-2. 使用模块
+[中文文档]("./readmecn.md")
 
-#### 安装模块
+## Quick start
+1. Install module
+2. Using modules
 
-```
+#### Installing the module
+
+```js
 npm install webtojson
 ```
-或者
-```
+or
+
+```js
 yarn add webtojson
 ```
 
-#### 使用模块
+#### Using modules
 
-1. 引入模块
+Introduce module
 
 ```js
-var {webToJson} = require("webtojson");
+var {webToJson} = require ("webtojson");
 ```
 
-2. 执行方法
-执行`webToJson`方法
+2. Implementation method
+Execute the `webToJson` method
 
-比如下面代码是抓取百度搜索关键词`node`的结果;
+For example, the following code is the result of crawling the Baidu search keyword `node`;
 ```js
-(async()=>{    
-    console.log(await webToJson(
-      "https://www.baidu.com/s?wd=node",      
-      {
-        id: "h3.t",
-        title: "h3.t"
-      },
-      {         
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/82.0.4083.0 Safari/537.36",
-          "Cookie": "**"            
-        }
-      }
-    ));
-})();
+(async () => {
+    console.log (await webToJson (
+      "https://www.baidu.com/s?wd=node",
+      {
+        id: "h3.t",
+        title: "h3.t"
+      },
+      {
+        headers: {
+          "User-Agent":
+            "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 82.0.4083.0 Safari / 537.36",
+          "Cookie": "**"
+        }
+      }
+    ));
+}) ();
 ```
+
+
 
 #### API
-模块提供了两个方法: `webToJson`和`webToJsonChain`
+The module provides two methods: `webToJson` and` webToJsonChain`
 
 
-##### webToJson  
-webToJson(urls, selector, option);
-`webToJson`方法可以抓取单页面数据;
+##### webToJson
+webToJson (urls, selector, option);
+`webToJson` method can grab single page data;
 
-* urls: string | array 需要抓取内容的url地址，可以单个url或者多个
-* selector: object 制定需要抓取内容;
-* option: object 配置项（可选）
-    * paging: 翻页配置项（可选）
-        * pageNum: number  总页数
-        * offset: number 每一页的偏移量
-        * keyword: string url对应的关键字
-    * headers: 请求头设置（可选）
-        * User-Agent: 制定useragent（可选）
-        * Cookie: 制定Cookie(可选) 比如一些搜索引擎需要提供cookie才会有结果;
+* urls: string | array URLs that need to crawl content, single url or multiple
+* selector: object specifies the content to be fetched;
+* option: object configuration item (optional)
+    * paging: paging configuration (optional)
+        * pageNum: number
+        * offset: number offset of each page
+        * keyword: keyword corresponding to string url
+    * headers: request header settings (optional)
+        * User-Agent: Specify useragent (optional)
+        * Cookie: Make a cookie (optional). For example, some search engines need to provide cookies to have results;
 
 
-下面是selector的一种形式：
+The following is a form of selector:
 ```
 {
-    id: ".typecont span a",
-    title: ".typecont span a",
-    _url: ".typecont span a"
+    id: ".typecont span a",
+    title: ".typecont span a",
+    _url: ".typecont span a"
 }
 ```
-selector的key的最终json的属性。
-value是类似jquery一样的选择器, 最后会将选择器对应dom节点的内容作为json的值。
+The final json attribute of the selector key.
+value is a selector similar to jquery. Finally, the content of the dom node corresponding to the selector is used as the value of json.
 
-selector的value还可以是函数，从而可以自定义获取dom
-``` 
+The value of the selector can also be a function, so you can get the dom by yourself
+```
 {
-    id: ".typecont span a",
-    title: ".typecont span a",
-    _url: function($){
-        return $(".typecont span").eq(0);
-    }
+    id: ".typecont span a",
+    title: ".typecont span a",
+    _url: function ($) {
+        return $ (". typecont span"). eq (0);
+    }
 }
 ```
 
 ##### webToJsonChain
-webToJsonChain(urls, selector, option).extend(selector).getData()
-`webToJsonChain`方法可以将多个页面信息合并在一起;
+webToJsonChain (urls, selector, option) .extend (selector) .getData ()
+`webToJsonChain` method can merge multiple page information together;
 
-`webToJsonChain`和`webToJsonChain`的参数是一致的
+The parameters of `webToJsonChain` and` webToJsonChain` are the same
 
-extend方法会根据之前数据`_url`字段来打开新地址,
+The extend method will open a new address based on the previous data `_url` field.
 
-getData可以得到整个链的数据
-
-
-
-
-
-
-
-
-
-
+getData can get the data of the entire chain
 
 
