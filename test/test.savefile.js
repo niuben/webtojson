@@ -15,7 +15,7 @@
       id: ".typecont span a",
       title: ".typecont span a",
       url: ".typecont span a"
-    }).getData();
+    }).saveFile("./data.json");
       
     console.log(shiciData);    
 })();

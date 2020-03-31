@@ -1,12 +1,12 @@
 {
   "name": "webtojson",
-  "version": "0.3.1",
-  "description": "通过jquery selector将网页内容转化成json数据",
+  "version": "0.3.4",
+  "description": "Use jquery selector to convert web content into json data",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["tojson", "jquery selector", "chain"],
+  "keywords": ["tojson", "jquery selector", "chain", "convert"],
   "author": "",
   "license": "ISC",
   "dependencies": {

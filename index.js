@@ -1,4 +1,5 @@
 var _ = require("underscore");
+var file = require("./lib/file");
 var { loop, extendCollect } = require("./lib/common");
 
 // 代理层将用户的API翻译await/async形式
@@ -6,6 +7,13 @@ var { loop, extendCollect } = require("./lib/common");
 var chainArr = [];
 var actions = {};
 actions = {
+  add: function() {
+    addChain.call(null, {
+      type: "add",
+      argus: _.toArray(arguments)
+    });
+    return actions;
+  },
   extend: function() {
     addChain.call(null, {
       type: "extend",
@@ -38,20 +46,28 @@ async function next() {
   for (var action of chainArr) {
     switch (action.type) {
       case "webtojson":
-        json = await webToJson.apply(null, action.argus);
+        json = await loop.apply(null, action.argus);
         break;
-      case "extend":
-        _.isArray(action.argus) && action.argus.unshift(json);
-        json = extendCollect(json, await webToJson.apply(null, action.argus));
-        break;
+      // 当只有一个参数时才使用之前的数据;              
+      case "extend":        
+      case "add":       
+        if(_.isArray(action.argus) && action.argus.length == 1){
+          action.argus.unshift(json);          
+        }
+      var data = await loop.apply(null, action.argus);
+      json =  action.type == "extend" ?  extendCollect(json, data) : json.concat(data);
+      break;
       case "getData":
-        return json;
-        break;
+        return json;      
+      case "saveFile":
+        var path = action.argus[0];
+        file.create(path, JSON.stringify(json, null, 4));
+        break;        
     }
   }
 }
 
-function webToJsonChain(urls, config, option) {
+function webtojson(urls, config, option) {
   addChain.call(null, {
     type: "webtojson",
     argus: _.toArray(arguments)
@@ -70,12 +86,5 @@ function webToJsonChain(urls, config, option) {
         "_url": ".typecont>span a",                          
     }
     */
-async function webToJson(urls, config, option) {
-  return await loop(urls, config, option);
-}
 
-module.exports = {
-  // webToJson,
-  webToJson,
-  webToJsonChain
-};
+module.exports = webtojson

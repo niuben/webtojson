@@ -1,8 +1,8 @@
 (async()=>{
 
-    var {webToJson} = require("../index");    
+    var webtojson = require("../index");    
 
-    var baiduData = await webToJson(
+    var baiduData = await webtojson(
       "https://www.baidu.com/s?wd=node",      
       {
         id: "h3.t",

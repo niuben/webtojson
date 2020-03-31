@@ -4,7 +4,7 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
+
         {
             "type": "node",
             "request": "launch",
@@ -12,7 +12,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/test/test.index.js"
+            "program": "${workspaceFolder}/test/test.saveFile.js"
         }
     ]
 }
