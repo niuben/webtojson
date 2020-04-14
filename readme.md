@@ -75,7 +75,7 @@ The module provides the following methods:
 webtojson(urls, selector, option);
 `webtojson` method can grab single page data;
 
-* urls: string | array The url address of the content to be crawled. It can be a single url or multiple;(required)
+* urls: string | array | collection The url address of the content to be crawled. It can be a single url or multiple;(required)
 * selector: object specifies the content to be crawled;(required)
 * option: object configuration item(optional)  
     * paging: paging configuration(optional)  
@@ -85,6 +85,31 @@ webtojson(urls, selector, option);
     * headers: request header settings(optional)
         * User-Agent: Specify useragent(optional)
         * Cookie: Make a cookie. For example, some search engines need to provide cookies to have results (optional)
+
+Urls supports three types of strings, arrays, and collections:
+
+When urls is a string, only the content of a single url is crawled. as follows:
+```js
+webtosjon ("https://www.google.com/search?q=node", selector, option);
+```
+
+When urls is an array, it will grab all the url addresses in the array and merge all the values together. as follows:
+```js
+webtosjon (["https://www.google.com/search?q=node", "https://www.google.com/search?q=javascript"], selector, option);
+```
+
+When urls is the collection, object `url` field will be used and all values are merged together. as follows:
+```js
+webtosjon ([
+     {
+       title: "search node",
+       url: "https://www.google.com/search?q=node",
+     }, {
+       title: "search javasript",
+       url: "https://www.google.com/search?q=javascript",
+     }
+], selector, option);
+```
 
 
 The following is a form of selector:  

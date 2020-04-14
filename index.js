@@ -75,16 +75,4 @@ function webtojson(urls, config, option) {
   return actions;
 }
 
-/*
-    * 初始化参数
-    * 1. urls: ""或者[]
-    * 2. config: 对象配置
-    * 3. option
-    var config = {
-        "id": ".typecont>span",
-        "title": ".typecont>span a",
-        "_url": ".typecont>span a",                          
-    }
-    */
-
 module.exports = webtojson

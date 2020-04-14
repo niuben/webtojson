@@ -70,7 +70,7 @@ result
 webtojson(urls, selector, option);
 `webtojson`方法可以抓取单页面数据;
 
-* urls: string | array  需要抓取内容的url地址，可以单个url或者多个; (必填)
+* urls: string | array | collection  需要抓取内容的url地址，可以单个url或者多个; (必填)
 * selector: object 制定需要抓取内容; (必填)
 * option: object 配置项（可选）
     * paging: 翻页配置项（可选）
@@ -80,6 +80,33 @@ webtojson(urls, selector, option);
     * headers: 请求头设置（可选）
         * User-Agent: 制定useragent（可选）
         * Cookie: 制定Cookie(可选) 比如一些搜索引擎需要提供cookie才会有结果;
+
+urls支持字符串、数组、集合三种类型：
+
+当urls是字符串时, 只抓取单个url的内容。 如下:
+```js
+webtosjon("https://www.google.com/search?q=node", selector, option);
+```
+
+urls是数组时会抓取数组中所有url地址，并将所有值合并在一起。如下:
+```js
+webtosjon(["https://www.google.com/search?q=node", "https://www.google.com/search?q=javascript"], selector, option);
+```
+
+urls是集合时候会使用集合对象url字段, 并将所有值合并在一起。如下:
+```js
+webtosjon([
+    {
+      title: "search node",
+      url: "https://www.google.com/search?q=node", 
+    },{
+      title: "search javasript",
+      url: "https://www.google.com/search?q=javascript",
+    }
+], selector, option);
+```
+
+
 
 
 下面是selector的一种形式：
@@ -99,7 +126,7 @@ selector是`key/value`形式，`key`是最终`json`的属性名, `value`是`json
 {
     id: ".typecont",
     title: ".typecont span a",
-    url: function($, parentEle){                
+    url: function($, idEle){                
         return $(parentEle).find("a").attr("href");
     }
 }
